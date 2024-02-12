@@ -8,7 +8,7 @@ import reactor.core.publisher.Mono;
 
 public interface DataMapperService {
 
-    List<UserRepoDetails> filterAndMapRawData(Mono<String> rawGitHubData);
+    Mono<List<UserRepoDetails>> filterAndMapRawData(Mono<String> rawGitHubData);
 
     Mono<List<UserRepoBranchesDetails>> mapRawDataToBranchesDetails(Mono<String> rawBranchesData);
 

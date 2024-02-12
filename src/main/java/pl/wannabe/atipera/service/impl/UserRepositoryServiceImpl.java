@@ -24,10 +24,10 @@ public class UserRepositoryServiceImpl implements UserRepositoryService {
     private final DataFillerService dataFillerService;
 
     @Override
-    public List<RepositoryDataResponse> getUserReposDetails(String ownerLogin) {
+    public Mono<List<RepositoryDataResponse>> getUserReposDetails(String ownerLogin) {
         Mono<String> rawUserRepoList = gitHubApiService.getRawUserRepoList(ownerLogin);
-        List<UserRepoDetails> userRepoDetails = dataMapperService.filterAndMapRawData(rawUserRepoList);
-        List<RepositoryDataResponse> repositoryDataResponse = responseCreatorService
+        Mono<List<UserRepoDetails>> userRepoDetails = dataMapperService.filterAndMapRawData(rawUserRepoList);
+        Mono<List<RepositoryDataResponse>> repositoryDataResponse = responseCreatorService
                 .createRepositoryDataResponse(userRepoDetails);
         return dataFillerService.fillWithBranchesData(repositoryDataResponse);
     }
