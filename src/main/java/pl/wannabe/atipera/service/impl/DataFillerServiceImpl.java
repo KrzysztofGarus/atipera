@@ -23,17 +23,20 @@ public class DataFillerServiceImpl implements DataFillerService {
     private final ResponseCreatorService responseCreatorService;
 
     @Override
-public Mono<List<RepositoryDataResponse>> fillWithBranchesData(Mono<List<RepositoryDataResponse>> repositoryDataResponse) {
-    return repositoryDataResponse.flatMapMany(Flux::fromIterable)
-            .flatMap(repository -> {
-                Mono<String> rawBranchesData = gitHubApiService.getRawBranchesData(repository.ownerLogin(), repository.repositoryName());
-                return dataMapperService.mapRawDataToBranchesDetails(rawBranchesData)
-                        .flatMap(branchesDetails -> {
-                            List<BranchesDataResponse> branchesDataResponses = responseCreatorService.createBranchesDataResponse(branchesDetails);
-                            repository.branches().addAll(branchesDataResponses);
-                            return Mono.just(repository);
-                        });
-            })
-            .collectList();
-}
+    public Mono<List<RepositoryDataResponse>> fillWithBranchesData(
+            Mono<List<RepositoryDataResponse>> repositoryDataResponse) {
+        return repositoryDataResponse.flatMapMany(Flux::fromIterable)
+                .flatMap(repository -> {
+                    Mono<String> rawBranchesData = gitHubApiService.getRawBranchesData(repository.ownerLogin(),
+                            repository.repositoryName());
+                    return dataMapperService.mapRawDataToBranchesDetails(rawBranchesData)
+                            .flatMap(branchesDetails -> {
+                                List<BranchesDataResponse> branchesDataResponses = responseCreatorService
+                                        .createBranchesDataResponse(branchesDetails);
+                                repository.branches().addAll(branchesDataResponses);
+                                return Mono.just(repository);
+                            });
+                })
+                .collectList();
+    }
 }

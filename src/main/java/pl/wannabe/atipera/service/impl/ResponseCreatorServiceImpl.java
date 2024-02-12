@@ -18,15 +18,18 @@ import reactor.core.publisher.Mono;
 public class ResponseCreatorServiceImpl implements ResponseCreatorService {
 
     @Override
-public Mono<List<RepositoryDataResponse>> createRepositoryDataResponse(Mono<List<UserRepoDetails>> userRepoDetails) {
-    return userRepoDetails.flatMapMany(Flux::fromIterable)
-            .map(detail -> new RepositoryDataResponse(detail.name(), detail.owner().login(), new ArrayList<>()))
-            .collectList();
-}
+    public Mono<List<RepositoryDataResponse>> createRepositoryDataResponse(
+            Mono<List<UserRepoDetails>> userRepoDetails) {
+        return userRepoDetails.flatMapMany(Flux::fromIterable)
+                .filter(detail -> detail != null && detail.owner() != null)
+                .map(detail -> new RepositoryDataResponse(detail.name(), detail.owner().login(), new ArrayList<>()))
+                .collectList();
+    }
 
     @Override
     public List<BranchesDataResponse> createBranchesDataResponse(List<UserRepoBranchesDetails> branchesDetailsList) {
         return branchesDetailsList.stream()
+                .filter(detail -> detail != null && detail.commit() != null)
                 .map(detail -> new BranchesDataResponse(detail.name(), detail.commit().sha()))
                 .collect(Collectors.toList());
     }
