@@ -3,9 +3,10 @@ package pl.wannabe.atipera.service;
 import java.util.List;
 
 import pl.wannabe.atipera.dto.RepositoryDataResponse;
+import reactor.core.publisher.Mono;
 
 public interface UserRepositoryService {
 
-    List<RepositoryDataResponse> getUserReposDetails(String ownerLogin);
+    Mono<List<RepositoryDataResponse>> getUserReposDetails(String ownerLogin);
 
 }

@@ -11,16 +11,18 @@ import pl.wannabe.atipera.dto.RepositoryDataResponse;
 import pl.wannabe.atipera.dto.UserRepoBranchesDetails;
 import pl.wannabe.atipera.dto.UserRepoDetails;
 import pl.wannabe.atipera.service.ResponseCreatorService;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Service
 public class ResponseCreatorServiceImpl implements ResponseCreatorService {
 
     @Override
-    public List<RepositoryDataResponse> createRepositoryDataResponse(List<UserRepoDetails> userRepoDetails) {
-        return userRepoDetails.stream()
-                .map(detail -> new RepositoryDataResponse(detail.name(), detail.owner().login(), new ArrayList<>()))
-                .collect(Collectors.toList());
-    }
+public Mono<List<RepositoryDataResponse>> createRepositoryDataResponse(Mono<List<UserRepoDetails>> userRepoDetails) {
+    return userRepoDetails.flatMapMany(Flux::fromIterable)
+            .map(detail -> new RepositoryDataResponse(detail.name(), detail.owner().login(), new ArrayList<>()))
+            .collectList();
+}
 
     @Override
     public List<BranchesDataResponse> createBranchesDataResponse(List<UserRepoBranchesDetails> branchesDetailsList) {

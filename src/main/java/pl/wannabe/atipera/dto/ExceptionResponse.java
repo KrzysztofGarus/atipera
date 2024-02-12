@@ -2,7 +2,7 @@ package pl.wannabe.atipera.dto;
 
 public record ExceptionResponse(
 
-    String status,
+    int status,
     String message
 ){
     

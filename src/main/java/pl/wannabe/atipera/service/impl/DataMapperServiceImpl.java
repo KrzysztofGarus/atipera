@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 
@@ -21,7 +22,7 @@ public class DataMapperServiceImpl implements DataMapperService {
     private final ObjectMapper objectMapper;
 
     @Override
-    public List<UserRepoDetails> filterAndMapRawData(Mono<String> rawGitHubData) {
+    public Mono<List<UserRepoDetails>> filterAndMapRawData(Mono<String> rawGitHubData) {
         return rawGitHubData.flatMap(data -> {
             try {
                 List<UserRepoDetails> details = objectMapper.readValue(data,
@@ -30,10 +31,12 @@ public class DataMapperServiceImpl implements DataMapperService {
                         .filter(detail -> !detail.fork().equals("true"))
                         .collect(Collectors.toList());
                 return Mono.just(filteredDetails);
+            } catch (JsonProcessingException e) {
+                return Mono.error(e);
             } catch (Exception e) {
                 return Mono.error(e);
             }
-        }).block();
+        });
     }
 
     @Override
@@ -43,6 +46,8 @@ public class DataMapperServiceImpl implements DataMapperService {
                 List<UserRepoBranchesDetails> details = objectMapper.readValue(data, TypeFactory.defaultInstance()
                         .constructCollectionType(List.class, UserRepoBranchesDetails.class));
                 return Mono.just(details);
+            } catch (JsonProcessingException e) {
+                return Mono.error(e);
             } catch (Exception e) {
                 return Mono.error(e);
             }
