@@ -25,6 +25,9 @@ import pl.wannabe.atipera.service.impl.GitHubApiServiceImpl;
 import pl.wannabe.atipera.service.impl.VariableProviderImpl;
 import reactor.test.StepVerifier;
 
+/**
+ * This class contains tests for the GitHubApiServiceImpl class.
+ */
 @SpringBootTest
 public class GitHubApiServiceImplTest {
 

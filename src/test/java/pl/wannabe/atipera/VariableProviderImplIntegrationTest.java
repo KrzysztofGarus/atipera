@@ -8,6 +8,9 @@ import pl.wannabe.atipera.service.impl.VariableProviderImpl;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+/**
+ * Integration test class for VariableProviderImpl.
+ */
 @SpringBootTest
 public class VariableProviderImplIntegrationTest {
 
