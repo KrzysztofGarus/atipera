@@ -5,7 +5,7 @@
 
 - make sure You have java installed - project uses Java 21
 
-- download this jar file -> 
+- download this jar file -> https://drive.google.com/file/d/1OEygx8bU4Nkes4aX9_lcyzhOL1Et0YA_/view?usp=sharing
 
 - go to the jar file directory and open terminal
 
