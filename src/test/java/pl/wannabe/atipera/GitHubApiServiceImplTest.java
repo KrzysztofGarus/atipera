@@ -64,7 +64,7 @@ public class GitHubApiServiceImplTest {
     }
 
     @Test
-    public void testGetRawGitHubUserRepoDetailsSucces() throws IOException, URISyntaxException {
+    public void testGetRawGitHubUserRepoDetails_Succes() throws IOException, URISyntaxException {
 
         String owner = "test_owner";
 
@@ -83,7 +83,7 @@ public class GitHubApiServiceImplTest {
     }
 
     @Test
-    public void testGetRawGitHubUserRepoDetailsUnauthorized() throws IOException, URISyntaxException {
+    public void testGetRawGitHubUserRepoDetails_Unauthorized() throws IOException, URISyntaxException {
 
         String owner = "test_owner";
 
@@ -98,7 +98,7 @@ public class GitHubApiServiceImplTest {
     }
 
     @Test
-    public void testGetRawGitHubUserRepoDetailsNotFound() throws IOException, URISyntaxException {
+    public void testGetRawGitHubUserRepoDetails_NotFound() throws IOException, URISyntaxException {
 
         String owner = "test_owner";
         int perPage = 100;

@@ -1,4 +1,5 @@
 package pl.wannabe.atipera.service.impl;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
