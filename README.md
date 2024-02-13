@@ -10,8 +10,7 @@
 - go to the jar file directory and open terminal
 
 - type: 
-$env:githubtoken = "github_token_from_github_api" 
-use Your api token https://github.com/settings/tokens -> generate new token (https://docs.github.com/en/rest)
+$env:githubtoken = "github_token_from_github_api"   -> use Your api token https://github.com/settings/tokens -> generate new token (https://docs.github.com/en/rest)
 
 - type: 
 java -jar atipera_app.jar
