@@ -16,6 +16,9 @@ import pl.wannabe.atipera.service.impl.ResponseCreatorServiceImpl;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
+/**
+ * This class contains tests for the ResponseCreatorServiceImpl class.
+ */
 @SpringBootTest
 class ResponseCreatorServiceImplTest {
 

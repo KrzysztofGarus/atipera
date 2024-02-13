@@ -7,6 +7,12 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 
+/**
+    * Configures the Jackson ObjectMapper with the specified property naming strategy and disables
+    * deserialization feature for unknown properties.
+    *
+    * @return The configured Jackson2ObjectMapperBuilder.
+    */
 @Configuration
 public class JacksonConfig {
 
